@@ -7,7 +7,9 @@ import { SidemenuComponent } from './components/sidemenu/sidemenu.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { WidgetareaComponent } from './components/widgetarea/widgetarea.component';
 import { ControlsidebarComponent } from './components/controlsidebar/controlsidebar.component';
+import { LoginComponent } from './components/login/login.component';
 
+import { AuthService } from './services/authentication/auth.service';
 import { WidgetLibraryService } from './services/widgetLibrary-service/widget-library.service';
 import { WidgetHostDirective } from './directives/widget-host.directive';
 import { GmapService } from './components/widgets/stationskort/gmap.service';
@@ -21,6 +23,7 @@ import {HttpModule} from '@angular/http';
   declarations: [
     AppComponent,
     //Layout ----->
+    LoginComponent,
     TopmenuComponent,
     SidemenuComponent,
     FooterComponent,
@@ -36,7 +39,7 @@ import {HttpModule} from '@angular/http';
     HttpModule
   ],
   entryComponents: [TestboxComponent, StationskortComponent], //<--- Dynamic Components resgiter here
-  providers: [WidgetLibraryService, GmapService],
+  providers: [AuthService, WidgetLibraryService, GmapService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

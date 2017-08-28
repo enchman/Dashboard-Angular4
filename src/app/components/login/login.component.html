@@ -1,0 +1,29 @@
+<!-- <div id="login" class="login-box">
+    <div class="row">
+        <div class="col-sm-4"></div>
+        <div class="col-sm-4">
+            <div class="box-field">
+                <div class="line-box">
+                    <input #email type="text" placeholder="E-mail" (keyup.enter)="login(email.value, password.value)" (blur)="validateEmail(email.value, $event)" autofocus/>
+                </div>
+                <div class="line-box">
+                    <input #password type="password" placeholder="Adgangskode" (keyup.enter)="login(email.value, password.value)" (blur)="validatePassword(email.value, $event)" autocomplete="off"/>
+                </div>
+                <button type="button" (click)="login(email.value, password.value)">Login</button>
+            </div>
+        </div>
+        <div class="col-sm-4"></div>
+    </div>
+</div> -->
+<div id="login">
+    <div class="login-page">
+        <div class="form">
+            <form class="login-form">
+            <input #email type="text" placeholder="E-mail" (keyup.enter)="login(email.value, password.value)" (blur)="validateEmail(email.value, $event)" data-toggle="popover" data-placement="right" title="Fejl i e-mail" data-content="Forkert e-mail format" autofocus/>
+            <input #password type="password" placeholder="Adgangkode" (keyup.enter)="login(email.value, password.value)" (blur)="validatePassword(email.value, $event)" data-toggle="popover" data-placement="right" title="Fejl i adgangkode" data-content="Forkert adgangskode<br/>Adgangskode skal indeholde mindst 6 bogstaver" autocomplete="off"/>
+            <button type="button" (click)="login(email.value, password.value)">Login</button>
+            <p class="message">Mangler en bruger? <a href="#">Opret en bruger</a></p>
+            </form>
+        </div>
+    </div>
+</div>
