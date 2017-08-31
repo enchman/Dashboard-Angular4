@@ -22,6 +22,7 @@ import {HttpModule} from '@angular/http';
 import { SpeedAverageHeatmapComponent } from './components/widgets/speed-average-heatmap/speed-average-heatmap.component';
 
 import { DatePickerModule } from 'ng2-datepicker';
+import { AuthService } from './services/auth/auth.service';
 
 @NgModule({
   declarations: [
@@ -45,7 +46,7 @@ import { DatePickerModule } from 'ng2-datepicker';
     HttpModule
   ],
   entryComponents: [TestboxComponent, StationskortComponent, SpeedAverageHeatmapComponent], //<--- Dynamic Components resgiter here
-  providers: [WidgetLibraryService, UserService, DashboardcontrollerService, GmapService, GmapSAService],
+  providers: [WidgetLibraryService, UserService, DashboardcontrollerService, GmapService, GmapSAService, AuthService],
 
   bootstrap: [AppComponent]
 })
