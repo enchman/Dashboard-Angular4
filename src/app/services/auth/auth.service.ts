@@ -1,11 +1,12 @@
 import { Injectable } from '@angular/core';
-import { Http, Headers, Response, RequestOptions } from '@angular/http';
+import { Http, Headers, Response, RequestOptions, RequestMethod } from '@angular/http';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/toPromise';
 
 interface IUserLogin{
   username: string;
   password: string;
+  remember: boolean;
 }
 
 interface IUserIdentity{
@@ -19,15 +20,19 @@ export class AuthService {
   private static user: IUserIdentity;
 
   public static urlToken = "http://localhost:63810/connect/token";
-  public static urlSignIn = "http://localhost:63810/login/";
+  public static urlSignIn = "http://localhost:5000/login/";
   public static urlSignOut = "http://localhost:63810/logout";
 
   constructor(private http: Http) { }
 
   public signIn(username: string, password: string, success?: Function, error?: Function){
+    // console.log("AuthService.SignIn")
+    // console.log("Username: " + username)
+    // console.log("Password: " + password)
     this.authorizing({
       username: username,
-      password: password
+      password: password,
+      remember: true
     }).then(x => this.successHandler(x, success), x => this.errorHandler(x, error));
   }
 
@@ -37,7 +42,7 @@ export class AuthService {
 
   public test(model: IUserLogin): Promise<any>{
     
-    return this.http.post(AuthService.urlSignIn, model)
+    return this.http.get(AuthService.urlSignIn)
       .toPromise();
   }
 
@@ -58,8 +63,7 @@ export class AuthService {
   }
 
   private authorizing(model: IUserLogin): Promise<IUserIdentity>{
-    let options = this.getOptions();
-    console.log(options);
+    let options = this.getOptions(model);
     return this.http.post(AuthService.urlSignIn, model, options)
       .toPromise()
       .then(this.onAuthorizing)
@@ -72,7 +76,7 @@ export class AuthService {
 
   private onAuthorizing(response: Response){
     let context = response.json();
-    return context.data || {};
+    return context;
   }
 
   private onAuthoringError(error: Response | any){
@@ -95,16 +99,32 @@ export class AuthService {
     }
   }
 
-  private getOptions(): RequestOptions{
+  private pack(model: IUserLogin): string{
+    let data = null;
+    for (var key in model) {
+      if (model.hasOwnProperty(key)) {
+        var item = model[key];
+        if(data != null){
+          data += "&" + key + "=" + model[key];
+        }
+        else{
+          data = key + "=" + model[key];
+        }
+      }
+    }
+    return data;
+  }
+
+  private getOptions(model: IUserLogin): RequestOptions{
     let data = new Headers({
-       'Access-Control-Allow-Origin': '*',
-      // 'Http-Test-Tag': 'hello world',
-      // "Access-Control-Allow-Methods": "GET,HEAD,OPTIONS,POST,PUT",
-      // "Access-Control-Allow-Headers": "Origin, X-Requested-With, Content-Type, Accept, Authorization",
-      //'Access-Control-Allow-Credentials': 'true',
-      'Content-Type': 'application/json'
+
+      'Access-Control-Allow-Origin': '*',
+      'Access-Control-Allow-Credentials': 'true',
+      //'Content-Type': 'application/json'
+      'Content-Type': 'application/x-www-form-urlencoded'
     });
-    return new RequestOptions({headers: data});
+    let body = this.pack(model);
+    return new RequestOptions({headers: data, body: body, method: RequestMethod.Post});
   }
 
 }

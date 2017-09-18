@@ -20,11 +20,10 @@ export class LoginComponent implements OnInit {
   }
 
   login(username: string, password: string): void{
+    // console.log("Username: " + username)
+    // console.log("Password: " + password)
     this.auth.signIn(username, password, this.onSuccess, this.onError);
-    // this.auth.test({username: username, password: password})
-    //   .then(x => console.log(x), x => console.log("Failed"));
   }
-
 
   validateEmail(value: string, e: Event): void{
     if(!this.isEmail(value)){
