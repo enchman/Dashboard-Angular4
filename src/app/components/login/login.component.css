@@ -9,6 +9,9 @@
     left: 0;
     z-index: 9999999;
 }
+.hide{
+  display: none;
+}
 .login-page {
   width: 360px;
   margin: auto;
@@ -22,6 +25,11 @@
   padding: 45px;
   text-align: center;
   box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+  border: 1px solid transparent;
+}
+#login.error .form,
+#login.error .form input.login-input{
+  border: 1px solid #e44;
 }
 .form input {
   font-family: "Roboto", sans-serif;
@@ -32,7 +40,11 @@
   margin: 0 0 15px;
   padding: 15px;
   box-sizing: border-box;
-  font-size: 14px;
+  font-size: 1.5rem;
+  border: 1px solid transparent;
+}
+.form input[type="checkbox"]{
+  width: auto;
 }
 .form button {
   font-family: "Roboto", sans-serif;
@@ -51,10 +63,21 @@
 .form button:hover,.form button:active,.form button:focus {
   background: #45D9FF;
 }
-.form .message {
+.form p,
+.form label {
   margin: 15px 0 0;
   color: #b3b3b3;
-  font-size: 12px;
+  font-size: 1.2rem;
+  font-weight: normal;
+}
+.form label{
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+.form label:hover{
+  color: #00c0ef;
 }
 .form .message a {
   color: #00c0ef;
