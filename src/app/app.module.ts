@@ -18,6 +18,7 @@ import { UserService } from './services/user-service/user.service';
 import { DashboardcontrollerService } from "./services/dashboardcontroller-service/dashboardcontroller.service";
 
 import { GoogleMapsContainerService } from "./services/googlemapscontainer/googlemapscontainer.service";
+import { GooglechartsService } from "./services/googlecharts/googlecharts.service";
 
 import { HttpModule } from '@angular/http';
 
@@ -45,7 +46,7 @@ import { AuthService } from './services/auth/auth.service';
     FormsModule,
     LoadingModule
   ],
-  providers: [WidgetLibraryService, UserService, DashboardcontrollerService, GoogleMapsContainerService, LoadingModule, AuthService],
+  providers: [WidgetLibraryService, GooglechartsService, UserService, DashboardcontrollerService, GoogleMapsContainerService, LoadingModule, AuthService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
